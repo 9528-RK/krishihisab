@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: krushihisab
+    runtime: python
+    plan: starter
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app
+    envVars:
+      - key: DATABASE_PATH
+        value: /var/data/farmer_manager.db
+      - key: SECRET_KEY
+        generateValue: true
+    disk:
+      name: krushihisab-data
+      mountPath: /var/data
+      sizeGB: 1
